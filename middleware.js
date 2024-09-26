@@ -1,5 +1,7 @@
 const multer = require("multer");
 
+const fileSizeLimit=2*1024*1024
+
 exports.checkFileSize = (req, res, next) => {
     // Check if Content-Length header exists and is within the limit
     const contentLength = parseInt(req.headers["content-length"], 10);

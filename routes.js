@@ -5,7 +5,7 @@ const { checkFileSize, fileDataMiddleware } = require("./middleware");
 
 const router = express.Router();
 
-router.post("/create",checkFileSize,fileDataMiddleware([{name:'evidenceImage',maxCount:1}]), controller.createCrimeReport);
+router.post("/create",checkFileSize,fileDataMiddleware([{name:'image',maxCount:1}]), controller.createCrimeReport);
 router.post("/get", controller.getCrimeReportById);
 router.get("/getAll", controller.getAllCrimeReports);
 

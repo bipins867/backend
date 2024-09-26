@@ -1,5 +1,7 @@
+const fs = require("fs");
 const path = require("path");
 const CrimeReport = require("./models");
+
 
 const generateReportId = () => {
   const letters = Math.random().toString(36).substring(2, 5).toUpperCase(); // 3 random letters
@@ -10,10 +12,11 @@ const generateReportId = () => {
 // POST: Create a new crime report
 const createCrimeReport = async (req, res) => {
   try {
-    const { name, email, phoneNumber, location, typesOfCrime } = req.body;
+    const { name, email, phone, location, crime } = req.body;
     const reportId = generateReportId();
-    let evidenceImage = req.files["evidenceImage"]
-      ? req.files["evidenceImage"][0]
+  
+    let evidenceImage = req.files["image"]
+      ? req.files["image"][0]
       : null;
 
     const baseDir = path.join(
@@ -39,14 +42,15 @@ const createCrimeReport = async (req, res) => {
       reportId,
       name,
       email,
-      phoneNumber,
+      phoneNumber:phone,
       location,
-      typesOfCrime,
+      typesOfCrime:crime,
       evidenceImage: fileRelativePath,
     });
 
     return res.status(201).json(newCrimeReport);
   } catch (error) {
+    console.log(error);
     return res
       .status(500)
       .json({ error: "Error creating crime report", details: error.message });

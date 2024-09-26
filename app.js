@@ -20,7 +20,7 @@ app.use(
 
 app.use(bodyParser.json({ extends: false }));
 
-app.use('crimeReport',routes);
+app.use('/crimeReport',routes);
 
 db.sync()
   .then(() => {
